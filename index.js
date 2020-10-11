@@ -17,6 +17,7 @@ app.use(
     ].join(" ")
   )
 );
+app.use(express.static("build"));
 
 let contacts = [
   {
