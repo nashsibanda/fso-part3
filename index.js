@@ -92,7 +92,7 @@ app.post("/api/persons", (req, res) => {
 
 app.get("/info", (req, res) => res.send(infoHtml));
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
