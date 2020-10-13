@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-
-const name = process.argv[2] || null;
-const number = process.argv[3] || null;
+const uniqueValidator = require("mongoose-unique-validator");
 
 const url = process.env.MONGODB_URI;
 
@@ -20,9 +18,11 @@ mongoose
   });
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+  name: { type: String, required: true, unique: true, minlength: 3 },
+  number: { type: String, required: true, unique: true, minlength: 8 },
 });
+
+personSchema.plugin(uniqueValidator);
 
 personSchema.set("toJSON", {
   transform: (document, returnedObject) => {
@@ -35,26 +35,3 @@ personSchema.set("toJSON", {
 const Person = mongoose.model("Person", personSchema);
 
 module.exports = Person;
-
-// if (name && number) {
-//   const newPerson = new Person({
-//     name,
-//     number,
-//   });
-//   newPerson.save().then(result => {
-//     console.log(`added ${name} number ${number} to phonebook`);
-//     mongoose.connection.close();
-//   });
-// } else if (name || number) {
-//   console.log(
-//     "Both a name and number must be provided: node mongo.js <name> <number>"
-//   );
-//   mongoose.connection.close();
-// } else {
-//   Person.find().then(result => {
-//     result.forEach(person => {
-//       console.log(person.name, person.number);
-//     });
-//     mongoose.connection.close();
-//   });
-// }
