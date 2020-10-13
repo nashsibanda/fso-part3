@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
-const secrets = require("./config/secrets");
 
-const password = secrets.mongoDbPass;
 const name = process.argv[2] || null;
 const number = process.argv[3] || null;
 
-const url = `mongodb+srv://fso_user:${password}@fso-phonebook.iy6ey.mongodb.net/phonebookdb?retryWrites=true&w=majority`;
+const url = process.env.MONGODB_URI;
 
 mongoose.connect(url, {
   useNewUrlParser: true,

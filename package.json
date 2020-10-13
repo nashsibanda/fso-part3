@@ -15,6 +15,7 @@
   "author": "Nash Sibanda",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.9",
     "morgan": "^1.10.0"
