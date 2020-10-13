@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const name = process.argv[2] || null;
 const number = process.argv[3] || null;
-
 const url = process.env.MONGODB_URI;
 
 mongoose.connect(url, {
@@ -24,7 +23,7 @@ if (name && number) {
     name,
     number,
   });
-  newPerson.save().then(result => {
+  newPerson.save().then(() => {
     console.log(`added ${name} number ${number} to phonebook`);
     mongoose.connection.close();
   });
